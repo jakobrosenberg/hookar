@@ -1,35 +1,22 @@
-/**
+/** 
  * @template P
- * @typedef {(pri: P, ...rest)=>(P|P[]|void|Promise<P|P[]|void|any>)} Hook
+ * @template R
+ * @typedef {(pri: P, ...rest)=>R<P>} Hook
  */
+
 
 /**
  * @template P
- * @typedef {(pri: P, ...rest)=>P} PipelineHook
- */
-/**
- * @template P
- * @typedef {(pri: P, ...rest)=>Promise<P>} AsyncPipelineHook
- */
-/**
- * @template P
- * @typedef {(pri: P, ...rest)=>void} syncHook
- */
-/**
- * @template P
- * @typedef {(pri: P, ...rest)=>Promise<void>} AsyncHook
- */
-
-/**
- * @template P
+ * @template R
  * @callback AddHookToCollection
- * @param {Hook<P>} hook
+ * @param {Hook<P, R<P>} hook
  * @returns {function} unhook
  **/
 
 /**
  * @template P
- * @typedef {AddHookToCollection<P> & HooksCollectionProps<P>} HooksCollection
+ * @template R
+ * @typedef {AddHookToCollection<P, R> & HooksCollectionProps<P>} HooksCollection
  */
 
 /**
@@ -45,7 +32,8 @@
 /**
  * creates a hook collection
  * @template P
- * @return {HooksCollection<P>}
+ * @template R
+ * @return {HooksCollection<P, R>}
  * @example
  * const hooksCollection = createHook()
  * const unhookFn = hooksCollection(x => console.log('hello', x))
@@ -59,14 +47,12 @@
  * unhookFn()
  * unhookFn2()
  */
- export const createHook = ({ runner }) => {
-    // todo rename to createHooksCollection
-    // todo unify with hookHandler from buildtime
+ export const createHooksCollection = ({ runner }) => {
     /** @type {Hook<P>[]} */
     const hooks = []
 
     /**
-     *@type {HooksCollection<P>}
+     *@type {HooksCollection<P, R>}
      */
     const hooksCollection = hook => {
         const _hooks = [hook]
@@ -101,10 +87,12 @@
     return hooksCollection
 }
 
-// async pipeline
-// pipeline
-// sync
-// async
+/**
+ * @type {HooksCollection<string, Promise>}
+ */
+let testCollection
+
+testCollection
 
 export const createPipelineHooks = () =>
     createHook({
@@ -120,6 +108,12 @@ export const createPipelineHooks = () =>
                 ),
     })
 
+export const createPipelineHooksAsync    
+
+/**
+ * @template P payload
+ * @type {HooksCollection<P, }
+ */
 export const createSequenceHooks = () =>
     createHook({
         runner:
@@ -131,6 +125,7 @@ export const createSequenceHooks = () =>
                     param,
                 ),
     })
+
 
 export const createParallelHooks = () =>
     createHook({
