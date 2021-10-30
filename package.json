@@ -1,5 +1,5 @@
 {
-  "name": "pipehook",
+  "name": "hookar",
   "version": "0.0.1",
   "description": "small hook utility with support for hooks and pipelines",
   "main": "index.js",
