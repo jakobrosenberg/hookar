@@ -30,7 +30,7 @@ const unregister = collection(capitalizeTitle)
  */
 collection.run(person)
 
-console.log(person) // { title: 'mr', name: 'John Doe' }
+console.log(person) // { title: 'MR', name: 'John Doe' }
 
 ```
 
