@@ -1,1 +1,1 @@
-{"compilerOptions": {"checkJs": false}}
+{ "compilerOptions": { "checkJs": true } }
