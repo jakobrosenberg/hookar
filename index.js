@@ -58,26 +58,26 @@ const createHooksCollection = (runner) => {
 
 /**
  * @template P
- * @typedef {HooksCollection<(pri: P, ...rest)=>P>} PipelineCollectionSync
+ * @typedef {HooksCollection<(pri: P, ...rest)=>P>} CollectionSync
  */
 /**
  * @template P
- * @typedef {HooksCollection<(pri: P, ...rest)=>P|Promise<P>>} PipelineCollectionAsync
+ * @typedef {HooksCollection<(pri: P, ...rest)=>P|Promise<P>>} CollectionAsync
  */
 /**
  * @template P
- * @typedef {HooksCollection<((pri: P, ...rest)=>void)>} HooksCollectionSync
+ * @typedef {HooksCollection<((pri: P, ...rest)=>void)>} CollectionSyncVoid
  */
 /**
  * @template P
- * @typedef {HooksCollection<(pri: P, ...rest)=>void|Promise<void>>} HooksCollectionAsync
+ * @typedef {HooksCollection<(pri: P, ...rest)=>void|Promise<void>>} CollectionAsyncVoid
  */
 
 
 /**
  * @template T
- * @param {T} type
- * @returns {createPipelineCollection<T>|PipelineCollectionAsync<T>}
+ * @param {T=} type
+ * @returns {CollectionSync<T>|CollectionAsync<T>}
  */
 export const createPipelineCollection = (type) =>
     // @ts-ignore
@@ -96,7 +96,7 @@ export const createPipelineCollection = (type) =>
 /**
  * @template T
  * @param {T=} type
- * @returns {HooksCollectionSync<T>|HooksCollectionSync<T>}
+ * @returns {CollectionSyncVoid<T>|CollectionAsyncVoid<T>}
  */
 export const createSequenceHooksCollection = (type) =>
     createHooksCollection(
@@ -111,7 +111,7 @@ export const createSequenceHooksCollection = (type) =>
 /**
  * @template T
  * @param {T=} type
- * @returns {HooksCollectionSync<T>|HooksCollectionAsync<T>}
+ * @returns {CollectionSyncVoid<T>|CollectionAsyncVoid<T>}
  */
 export const createParallelHooksCollection = (type) =>
     createHooksCollection(
@@ -120,3 +120,21 @@ export const createParallelHooksCollection = (type) =>
                 Promise.all(hooks.map(hook => hook(value, ...rest))).then(r => value),
     )
 
+/**
+ * @template T
+ * @param {T=} type
+ * @returns {CollectionSync<T>|CollectionAsync<T>}
+ */
+ export const createGuardsCollection = (type) =>
+ // @ts-ignore
+ createHooksCollection(
+     hooks =>
+         (value, ...rest) =>
+             hooks.reduce(
+                 (pipedValue, hook) =>
+                     pipedValue?.then
+                         ? pipedValue.then(r => r && hook(r, ...rest))
+                         : pipedValue && hook(pipedValue, ...rest),
+                 value || true,
+             ),
+ )
