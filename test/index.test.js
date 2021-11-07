@@ -3,6 +3,7 @@ import {
     createSequenceHooksCollection,
     createParallelHooksCollection,
     createPipelineCollection,
+    createGuardsCollection,
 } from '../index.js'
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -95,12 +96,11 @@ test('parallel', test => {
     })
 })
 
-
 test('pipeline', test => {
     test('can handle no hook', async (test) => {
         const pipeline = createPipelineCollection()
-        const payload = {foo: 'bar'}
-        const expect = {foo: 'bar'}
+        const payload = { foo: 'bar' }
+        const expect = { foo: 'bar' }
         const result = await pipeline.run(payload)
 
         test('payload should be intact', () => assert.deepEqual(payload, expect))
@@ -132,4 +132,37 @@ test('pipeline', test => {
     })
 })
 
-
+test('guard', test => {
+    test('all true returns true', async test => {
+        const guards = createGuardsCollection()
+        guards(x => 1)
+        guards(x => 1)
+        guards(x => 1)
+        const result = guards.run()
+        assert.equal(result, 1)
+    })
+    test('values are proxied', async test => {
+        const guards = createGuardsCollection()
+        guards(x => x)
+        guards(x => x)
+        guards(x => x)
+        const result = guards.run('foobar')
+        assert.equal(result, 'foobar')
+    })
+    test('can handle async', async test => { 
+        const guards = createGuardsCollection()
+        guards(x => x+1)
+        guards(async x => x+2)
+        guards(x => x+3)
+        const result = await guards.run('foobar')
+        assert.equal(result, 'foobar123')
+    })
+    test('single false value returns false', async test => {
+        const guards = createGuardsCollection()
+        guards(x => x+1)
+        guards(async x => false)
+        guards(x => x+3)
+        const result = await guards.run('foobar')
+        assert.equal(result, false)
+    })
+})

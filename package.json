@@ -3,11 +3,13 @@
   "version": "0.0.1",
   "description": "small hook utility with support for hooks and pipelines",
   "main": "index.js",
-  "type": "module",
+  "type": "module",  
+  "types": "./typings/index.d.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "build": "tsc",
     "test": "probs test",
     "test-watch": "nodemon --exec npm run test"
   },
@@ -28,6 +30,7 @@
   "homepage": "https://github.com/jakobrosenberg/hook#readme",
   "devDependencies": {
     "nodemon": "^2.0.14",
-    "probs": "^0.0.1"
+    "probs": "^0.0.1",
+    "typescript": "^4.4.4"
   }
 }
