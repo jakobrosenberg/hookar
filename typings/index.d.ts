@@ -1,4 +1,4 @@
-export function createPipelineCollection<T>(type?: T): CollectionSync<T> | CollectionAsync<T>;
+export function createPipelineCollection<T>(type?: T): HooksCollection<T>;
 export function createSequenceHooksCollection<T>(type?: T): CollectionSyncVoid<T> | CollectionAsyncVoid<T>;
 export function createParallelHooksCollection<T>(type?: T): CollectionSyncVoid<T> | CollectionAsyncVoid<T>;
 export function createGuardsCollection<T>(type?: T): CollectionSync<T> | CollectionAsync<T>;

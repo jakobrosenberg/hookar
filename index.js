@@ -77,7 +77,7 @@ const createHooksCollection = (runner) => {
 /**
  * @template T
  * @param {T=} type
- * @returns {CollectionSync<T>|CollectionAsync<T>}
+ * @returns {HooksCollection<T>}
  */
 export const createPipelineCollection = (type) =>
     // @ts-ignore
@@ -86,7 +86,7 @@ export const createPipelineCollection = (type) =>
             (value, ...rest) =>
                 hooks.reduce(
                     (pipedValue, hook) =>
-                        pipedValue.then
+                        pipedValue?.then
                             ? pipedValue.then(r => hook(r, ...rest))
                             : hook(pipedValue, ...rest),
                     value,
@@ -103,7 +103,7 @@ export const createSequenceHooksCollection = (type) =>
         hooks =>
             (value, ...rest) => hooks.reduce(
                 (last, hook) =>
-                    last.then ? last.then(_ => hook(value, ...rest)) : hook(value, ...rest),
+                    last?.then ? last.then(_ => hook(value, ...rest)) : hook(value, ...rest),
                 value,
             )
     )
@@ -125,16 +125,16 @@ export const createParallelHooksCollection = (type) =>
  * @param {T=} type
  * @returns {CollectionSync<T>|CollectionAsync<T>}
  */
- export const createGuardsCollection = (type) =>
- // @ts-ignore
- createHooksCollection(
-     hooks =>
-         (value, ...rest) =>
-             hooks.reduce(
-                 (pipedValue, hook) =>
-                     pipedValue?.then
-                         ? pipedValue.then(r => r && hook(r, ...rest))
-                         : pipedValue && hook(pipedValue, ...rest),
-                 value || true,
-             ),
- )
+export const createGuardsCollection = (type) =>
+    // @ts-ignore
+    createHooksCollection(
+        hooks =>
+            (value, ...rest) =>
+                hooks.reduce(
+                    (pipedValue, hook) =>
+                        pipedValue?.then
+                            ? pipedValue.then(r => r && hook(r, ...rest))
+                            : pipedValue && hook(pipedValue, ...rest),
+                    value || true,
+                ),
+    )
