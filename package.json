@@ -1,9 +1,9 @@
 {
   "name": "hookar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "small hook utility with support for hooks and pipelines",
   "main": "index.js",
-  "type": "module",  
+  "type": "module",
   "types": "./typings/index.d.ts",
   "directories": {
     "test": "test"
