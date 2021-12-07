@@ -1,6 +1,6 @@
 {
   "name": "hookar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "small hook utility with support for hooks and pipelines",
   "main": "index.js",
   "type": "module",

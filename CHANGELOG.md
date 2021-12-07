@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/jakobrosenberg/hook/compare/v0.0.3...v0.0.4) (2021-12-07)
+
+
+### Bug Fixes
+
+* guards input was unrealiable ([28c8705](https://github.com/jakobrosenberg/hook/commit/28c870502c5a88de0f4532223b306b453a2b1b4a))
+
 ### [0.0.3](https://github.com/jakobrosenberg/hook/compare/v0.0.2...v0.0.3) (2021-11-07)
 
 
