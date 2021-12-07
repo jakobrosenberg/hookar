@@ -133,8 +133,8 @@ export const createGuardsCollection = (type) =>
                 hooks.reduce(
                     (pipedValue, hook) =>
                         pipedValue?.then
-                            ? pipedValue.then(r => r && hook(r, ...rest))
-                            : pipedValue && hook(pipedValue, ...rest),
+                            ? pipedValue.then(r => r && hook(value, ...rest))
+                            : pipedValue && hook(value, ...rest),
                     value || true,
                 ),
     )
