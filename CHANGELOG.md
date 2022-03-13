@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/jakobrosenberg/hook/compare/v0.0.5...v0.0.6) (2022-03-13)
+
+
+### Bug Fixes
+
+* missing runOnce type ([ec51f02](https://github.com/jakobrosenberg/hook/commit/ec51f022e2a1239e1e6b87e687dd9c65c67a05ec))
+
 ### [0.0.5](https://github.com/jakobrosenberg/hook/compare/v0.0.4...v0.0.5) (2022-03-13)
 
 
