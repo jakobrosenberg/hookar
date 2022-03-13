@@ -5,6 +5,8 @@
  * @returns {function} unhook
  **/
 
+import { runOnce } from "./util.js";
+
 /**
  * @template H
  * @typedef {AddHookToCollection<H> & HooksCollectionProps<H>} HooksCollection
@@ -19,9 +21,9 @@
  */
 
 /**
- * @template  T
+ * @template  V
  * @callback Runner
- * @param {HookCb<T>[]} value
+ * @param {HookCb<V>[]} value
  * @param  {...any} rest
  */
 
@@ -35,9 +37,8 @@
 /**
  * creates a hook collection
  * @template T
- * @template {HookCb<T>} H
  * @param {Runner<T>} runner
- * @return {HooksCollection<H>}
+ * @return {HooksCollection<HookCb<T>>}
  * @example
  * const hooksCollection = createHook()
  * const unhookFn = hooksCollection(x => console.log('hello', x))
@@ -52,11 +53,11 @@
  * unhookFn2()
  */
 const createHooksCollection = (runner) => {
-  /** @type {H[]} */
+  /** @type {HookCb<T>[]} */
   const hooks = [];
 
   /**
-   *@type {HooksCollection<H>}
+   *@type {HooksCollection<HookCb<T>>}
    */
   const hooksCollection = (hook) => {
     hooks.push(hook);
@@ -65,7 +66,7 @@ const createHooksCollection = (runner) => {
 
   hooksCollection.hooks = hooks;
   hooksCollection.run = runner(hooks);
-  hooksCollection.runOnce = runner(hooks);
+  hooksCollection.runOnce = runOnce(runner(hooks));
 
   return hooksCollection;
 };

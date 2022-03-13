@@ -30,7 +30,7 @@
   "homepage": "https://github.com/jakobrosenberg/hook#readme",
   "devDependencies": {
     "nodemon": "^2.0.14",
-    "probs": "^0.0.1",
+    "probs": "^1.1.0-3",
     "typescript": "^4.4.4"
   }
 }
