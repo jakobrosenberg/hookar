@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7-0](https://github.com/jakobrosenberg/hook/compare/v0.0.6...v0.0.7-0) (2022-04-28)
+
+
+### Bug Fixes
+
+* added cjs support ([ea9a6a7](https://github.com/jakobrosenberg/hook/commit/ea9a6a7863ff3c18bffc013e8c150b2230bdaf89))
+
 ### [0.0.6](https://github.com/jakobrosenberg/hook/compare/v0.0.5...v0.0.6) (2022-03-13)
 
 
