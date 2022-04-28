@@ -4,12 +4,12 @@ import {
   createParallelHooksCollection,
   createPipelineCollection,
   createGuardsCollection,
-} from "../index.js";
+} from "../esm/index.mjs";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 test("sequence", () => {
-  /** @returns {import('../index').HooksCollectionSync<{foo: string}>} */
+  /** @returns {import('../esm/index.mjs').HooksCollectionSync<{foo: string}>} */
   const _createSequenceHooksCollection = () => createSequenceHooksCollection();
 
   test("can handle no hook", () => {
@@ -185,7 +185,9 @@ test("runOnce", () => {
   hooks(() => {
     counter = counter + 1;
   });
+  assert.equal(counter, 0);
   hooks.runOnce();
+  assert.equal(counter, 1);
   hooks.runOnce();
   hooks.runOnce();
   assert.equal(counter, 1);

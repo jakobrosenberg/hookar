@@ -5,7 +5,7 @@
  * @returns {function} unhook
  **/
 
-import { runOnce } from "./util.js";
+import { runOnce } from "./util.mjs";
 
 /**
  * @template H
