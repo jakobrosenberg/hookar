@@ -7,6 +7,7 @@ export type HooksCollection<H> = AddHookToCollection<H> & HooksCollectionProps<H
 export type HooksCollectionProps<H> = {
     run: H;
     runOnce: H;
+    next: HookCb<H>;
     hooks: H[];
 };
 export type Runner<V> = (value: HookCb<V>[], ...rest: any[]) => any;

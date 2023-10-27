@@ -24,6 +24,7 @@ var _util = require("./util.js");
  * @typedef {Object} HooksCollectionProps
  * @prop {H} run
  * @prop {H} runOnce
+ * @prop {HookCb<H>} next
  * @prop {H[]} hooks
  */
 
@@ -76,6 +77,14 @@ var createHooksCollection = function createHooksCollection(runner) {
   hooksCollection.hooks = hooks;
   hooksCollection.run = runner(hooks);
   hooksCollection.runOnce = (0, _util.runOnce)(runner(hooks));
+
+  hooksCollection.next = function (hook) {
+    var unhook = hooksCollection(function () {
+      hook.apply(void 0, arguments);
+      unhook();
+    });
+  };
+
   return hooksCollection;
 };
 /**

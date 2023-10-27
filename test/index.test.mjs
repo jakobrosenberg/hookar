@@ -192,3 +192,17 @@ test("runOnce", () => {
   hooks.runOnce();
   assert.equal(counter, 1);
 });
+
+test('next', ()=>{
+  let counter = 0;
+  const hooks = createSequenceHooksCollection();
+  hooks.next(() => {
+    counter = counter + 1;
+  });
+  assert.equal(counter, 0);
+  hooks.run();
+  assert.equal(counter, 1);
+  hooks.run();
+  hooks.run();
+  assert.equal(counter, 1);
+})

@@ -17,6 +17,7 @@ import { runOnce } from "./util.mjs";
  * @typedef {Object} HooksCollectionProps
  * @prop {H} run
  * @prop {H} runOnce
+ * @prop {HookCb<H>} next
  * @prop {H[]} hooks
  */
 
@@ -67,6 +68,12 @@ const createHooksCollection = (runner) => {
   hooksCollection.hooks = hooks;
   hooksCollection.run = runner(hooks);
   hooksCollection.runOnce = runOnce(runner(hooks));
+  hooksCollection.next = (hook) => {
+    const unhook = hooksCollection((...payload) => {
+      hook(...payload);
+      unhook();
+    });
+  };
 
   return hooksCollection;
 };
