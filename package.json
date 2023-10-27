@@ -1,6 +1,6 @@
 {
   "name": "hookar",
-  "version": "0.0.7-0",
+  "version": "0.0.7",
   "description": "small hook utility with support for hooks and pipelines",
   "main": "./cjs/index.js",
   "module": "./esm/index.mjs",

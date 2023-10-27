@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/jakobrosenberg/hook/compare/v0.0.7-0...v0.0.7) (2023-10-27)
+
+
+### Features
+
+* added .next ([0435bcd](https://github.com/jakobrosenberg/hook/commit/0435bcd3f8f64c29bb17563698101c0e0228cf60))
+
 ### [0.0.7-0](https://github.com/jakobrosenberg/hook/compare/v0.0.6...v0.0.7-0) (2022-04-28)
 
 
